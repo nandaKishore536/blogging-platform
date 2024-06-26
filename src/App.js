@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BlogPostList from './components/BlogPostList';
+import BlogPost from './components/BlogPost';
+import AddEditPost from './components/AddEditPost';
+import Header from './components/Header';
+import GlobalStyle from './GlobalStyle';
+import styled from 'styled-components';
 
-function App() {
+const AppContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Router>
+        <Header />
+        <AppContainer>
+          <Routes>
+            <Route path="/" element={<BlogPostList />} />
+            <Route path="/post/:id" element={<BlogPost />} />
+            <Route path="/add" element={<AddEditPost />} />
+            <Route path="/edit/:id" element={<AddEditPost />} />
+          </Routes>
+        </AppContainer>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
